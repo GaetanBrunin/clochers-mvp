@@ -1,0 +1,10 @@
+# Tout ignorer
+*
+
+# Mais garder le dossier dist
+!dist/
+!dist/**
+
+# Garder les fichiers Git utiles
+!.gitignore
+!README.md
