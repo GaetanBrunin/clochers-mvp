@@ -2,8 +2,9 @@
 *
 
 # Mais garder le dossier dist
-!dist/
-!dist/**
+!assets/
+!assets/**
+!index.html
 
 # Garder les fichiers Git utiles
 !.gitignore
