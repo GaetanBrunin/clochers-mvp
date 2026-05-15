@@ -121,13 +121,15 @@ export function App() {
         {tab === 'carte' && (
           <section>
             <h2>Carte</h2>
-            <p className="muted">Mode statique sans API : sélectionnez une église puis ouvrez l’itinéraire.</p>
-            {churches.map((church) => (
-              <article key={church.id} className="card">
-                <p><strong>{church.name}</strong> — {church.city}</p>
-                <button onClick={() => window.open(googleDirections(church.latitude, church.longitude), '_blank')}>Itinéraire</button>
-              </article>
-            ))}
+            <p className="muted">Carte Leaflet (OpenStreetMap). Touchez un marqueur pour ouvrir la fiche.</p>
+            <LeafletMap onSelect={(churchId) => { setSelectedId(churchId); setTab('liste'); }} />
+            <div className="row" style={{ marginTop: 8 }}>
+              {churches.map((church) => (
+                <button key={church.id} onClick={() => window.open(googleDirections(church.latitude, church.longitude), '_blank')}>
+                  Itinéraire {church.name}
+                </button>
+              ))}
+            </div>
           </section>
         )}
 
@@ -291,4 +293,54 @@ function Quiz({ question, choices, state, onSubmit }: { question: string; choice
       {state && <p className={state.isCorrect ? 'success' : 'error'}>{state.isCorrect ? 'Bonne réponse' : 'Réessayer'}</p>}
     </div>
   );
+}
+
+
+function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
+  useEffect(() => {
+    let disposed = false;
+    const mapId = 'leaflet-map';
+
+    const ensureCss = () => {
+      if (document.getElementById('leaflet-css')) return;
+      const link = document.createElement('link');
+      link.id = 'leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    };
+
+    const boot = () => {
+      const L = (window as any).L;
+      if (!L || disposed) return;
+      const map = L.map(mapId, { zoomControl: true }).setView([50.17, 3.24], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      churches.forEach((church) => {
+        const marker = L.marker([church.latitude, church.longitude]).addTo(map);
+        marker.bindPopup(`<strong>${church.name}</strong><br/>${church.city}`);
+        marker.on('click', () => onSelect(church.id));
+      });
+    };
+
+    ensureCss();
+    if ((window as any).L) {
+      boot();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.async = true;
+      script.onload = boot;
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      disposed = true;
+      const mapNode = document.getElementById(mapId);
+      if (mapNode) mapNode.innerHTML = '';
+    };
+  }, [onSelect]);
+
+  return <div id="leaflet-map" className="leaflet-map" />;
 }

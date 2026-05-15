@@ -51,3 +51,5 @@ button.active { background: #d4b58a; color: #fff; border-color: #d4b58a; }
   background: #fff; border-top: 1px solid #d7c8b4; padding: 6px;
 }
 .bottom-nav button { border-radius: 8px; padding: 10px 4px; }
+
+.leaflet-map { height: 52vh; min-height: 320px; width: 100%; border-radius: 12px; border: 1px solid #dbcab2; overflow: hidden; }
