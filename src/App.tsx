@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Church, churches } from './data/churches';
 import { routes } from './data/routes';
 import {
@@ -297,6 +297,8 @@ function Quiz({ question, choices, state, onSubmit }: { question: string; choice
 
 
 function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
+  const mapRef = useRef<any>(null);
+
   useEffect(() => {
     let disposed = false;
     const mapId = 'leaflet-map';
@@ -310,13 +312,27 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
       document.head.appendChild(link);
     };
 
+    const destroyMap = () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+
     const boot = () => {
       const L = (window as any).L;
       if (!L || disposed) return;
+
+      // React StrictMode (dev) remonte les effets: nettoyer toute instance précédente.
+      destroyMap();
+
       const map = L.map(mapId, { zoomControl: true }).setView([50.17, 3.24], 11);
+      mapRef.current = map;
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
+
       churches.forEach((church) => {
         const marker = L.marker([church.latitude, church.longitude]).addTo(map);
         marker.bindPopup(`<strong>${church.name}</strong><br/>${church.city}`);
@@ -328,17 +344,22 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
     if ((window as any).L) {
       boot();
     } else {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-      script.async = true;
-      script.onload = boot;
-      document.body.appendChild(script);
+      const existingScript = document.getElementById('leaflet-js') as HTMLScriptElement | null;
+      if (existingScript) {
+        existingScript.addEventListener('load', boot, { once: true });
+      } else {
+        const script = document.createElement('script');
+        script.id = 'leaflet-js';
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        script.async = true;
+        script.onload = boot;
+        document.body.appendChild(script);
+      }
     }
 
     return () => {
       disposed = true;
-      const mapNode = document.getElementById(mapId);
-      if (mapNode) mapNode.innerHTML = '';
+      destroyMap();
     };
   }, [onSelect]);
 
