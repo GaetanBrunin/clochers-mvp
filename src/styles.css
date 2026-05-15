@@ -1,0 +1,53 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #2c241b;
+}
+
+body { margin: 0; background: #f6f1e8; }
+* { box-sizing: border-box; }
+
+.app-shell { max-width: 980px; margin: 0 auto; padding: 12px 12px 82px; }
+.topbar { margin-bottom: 10px; }
+.topbar h1 { margin: 0; font-size: 1.25rem; }
+.content h2 { margin: 8px 0; }
+
+.filters { display: grid; gap: 8px; margin-bottom: 10px; }
+input, textarea, button { font: inherit; }
+input, textarea {
+  width: 100%; border: 1px solid #cdbba1; border-radius: 10px; padding: 10px; background: #fff;
+}
+button {
+  border: 1px solid #bca688; border-radius: 10px; padding: 10px 12px; background: #fffaf2; color: #2c241b;
+}
+button:disabled { opacity: 0.55; }
+button.active { background: #d4b58a; color: #fff; border-color: #d4b58a; }
+
+.split { display: grid; gap: 12px; }
+@media (min-width: 900px) { .split { grid-template-columns: 320px 1fr; } }
+
+.church-row {
+  width: 100%; display: flex; flex-direction: column; align-items: flex-start;
+  margin-bottom: 8px; background: #fff; border: 1px solid #dbcab2;
+}
+.church-row.active { border-color: #b07e46; }
+
+.card, .church-detail {
+  border: 1px solid #dbcab2; border-radius: 12px; padding: 12px; background: #fff;
+}
+.church-detail img { width: 100%; max-height: 240px; object-fit: cover; border-radius: 10px; margin-bottom: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tabs { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+.muted { color: #665b4d; font-size: 0.95rem; }
+.success { color: #1f7a3d; }
+.error { color: #ab2f2f; }
+.danger { background: #fff1f1; border-color: #c56e6e; }
+
+.quiz-box { border-top: 1px dashed #d9ccb8; padding-top: 8px; margin-top: 8px; }
+.file-picker { position: relative; overflow: hidden; display: inline-flex; align-items: center; }
+.file-picker input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #fff; border-top: 1px solid #d7c8b4; padding: 6px;
+}
+.bottom-nav button { border-radius: 8px; padding: 10px 4px; }

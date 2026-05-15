@@ -1,11 +1,2 @@
-# Tout ignorer
-*
-
-# Mais garder le dossier dist
-!assets/
-!assets/**
-!index.html
-
-# Garder les fichiers Git utiles
-!.gitignore
-!README.md
+node_modules/
+dist/
