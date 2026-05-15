@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Church, churches } from './data/churches';
 import { routes } from './data/routes';
 import {
@@ -72,6 +72,11 @@ export function App() {
   const isFavorite = selected ? progress.favoriteChurchIds.includes(selected.id) : false;
   const isVisited = selected ? progress.visitedChurchIds.includes(selected.id) : false;
 
+  const handleMapSelect = useCallback((churchId: string) => {
+    setSelectedId(churchId);
+    setTab('liste');
+  }, []);
+
   return (
     <div className="app-shell">
       <header className="topbar">
@@ -122,7 +127,7 @@ export function App() {
           <section>
             <h2>Carte</h2>
             <p className="muted">Carte Leaflet (OpenStreetMap). Touchez un marqueur pour ouvrir la fiche.</p>
-            <LeafletMap onSelect={(churchId) => { setSelectedId(churchId); setTab('liste'); }} />
+            <LeafletMap onSelect={handleMapSelect} />
             <div className="row" style={{ marginTop: 8 }}>
               {churches.map((church) => (
                 <button key={church.id} onClick={() => window.open(googleDirections(church.latitude, church.longitude), '_blank')}>
@@ -298,10 +303,15 @@ function Quiz({ question, choices, state, onSubmit }: { question: string; choice
 
 function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
   const mapRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const onSelectRef = useRef(onSelect);
 
   useEffect(() => {
-    let disposed = false;
-    const mapId = 'leaflet-map';
+    onSelectRef.current = onSelect;
+  }, [onSelect]);
+
+  useEffect(() => {
+    let cancelled = false;
 
     const ensureCss = () => {
       if (document.getElementById('leaflet-css')) return;
@@ -317,16 +327,19 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
         mapRef.current.remove();
         mapRef.current = null;
       }
+      const el = containerRef.current as any;
+      if (el && el._leaflet_id) {
+        try { delete el._leaflet_id; } catch { el._leaflet_id = undefined; }
+      }
     };
 
     const boot = () => {
       const L = (window as any).L;
-      if (!L || disposed) return;
+      const container = containerRef.current;
+      if (!L || !container || cancelled) return;
 
-      // React StrictMode (dev) remonte les effets: nettoyer toute instance précédente.
       destroyMap();
-
-      const map = L.map(mapId, { zoomControl: true }).setView([50.17, 3.24], 11);
+      const map = L.map(container, { zoomControl: true }).setView([50.17, 3.24], 11);
       mapRef.current = map;
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -336,7 +349,7 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
       churches.forEach((church) => {
         const marker = L.marker([church.latitude, church.longitude]).addTo(map);
         marker.bindPopup(`<strong>${church.name}</strong><br/>${church.city}`);
-        marker.on('click', () => onSelect(church.id));
+        marker.on('click', () => onSelectRef.current(church.id));
       });
     };
 
@@ -344,12 +357,13 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
     if ((window as any).L) {
       boot();
     } else {
-      const existingScript = document.getElementById('leaflet-js') as HTMLScriptElement | null;
+      const scriptId = 'leaflet-js';
+      const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
       if (existingScript) {
         existingScript.addEventListener('load', boot, { once: true });
       } else {
         const script = document.createElement('script');
-        script.id = 'leaflet-js';
+        script.id = scriptId;
         script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
         script.async = true;
         script.onload = boot;
@@ -358,10 +372,10 @@ function LeafletMap({ onSelect }: { onSelect: (churchId: string) => void }) {
     }
 
     return () => {
-      disposed = true;
+      cancelled = true;
       destroyMap();
     };
-  }, [onSelect]);
+  }, []);
 
-  return <div id="leaflet-map" className="leaflet-map" />;
+  return <div ref={containerRef} className="leaflet-map" />;
 }
