@@ -1,5 +1,64 @@
-import { useMemo, useState } from 'react';import { churches } from './data/churches';import { routes } from './data/routes';import { getProgress, markChurchVisited, markDiscoverItemFound, resetProgress, saveChurchNote, saveProgress, saveQuizAnswer, toggleFavorite } from './lib/localProgress';
-const normalize=(s:string)=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();const g=(a:number,b:number)=>`https://www.google.com/maps/dir/?api=1&destination=${a},${b}`;
-export function App(){const [tab,setTab]=useState<'carte'|'liste'|'parcours'|'carnet'>('liste');const [selectedId,setSelectedId]=useState(churches[0]?.id??null);const [progress,setProgress]=useState(getProgress());const [q,setQ]=useState('');const [favOnly,setFav]=useState(false);const [unv,setUnv]=useState(false);const selected=churches.find(c=>c.id===selectedId)||null;const filtered=churches.filter(c=>(!q||`${c.name} ${c.city} ${c.shortDescription}`.toLowerCase().includes(q.toLowerCase()))&&(!favOnly||progress.favoriteChurchIds.includes(c.id))&&(!unv||!progress.visitedChurchIds.includes(c.id)));const stats={v:progress.visitedChurchIds.length,f:progress.favoriteChurchIds.length,d:progress.foundDiscoverItemIds.length};const badges=useMemo(()=>{const b:string[]=[];if(stats.v>=1)b.push('Première église visitée');if(stats.v>=3)b.push('3 églises visitées');if(stats.d>=1)b.push('Premier élément trouvé');if(stats.d>=5)b.push('5 éléments découverts');if(routes.some(r=>r.churchIds.every(id=>progress.visitedChurchIds.includes(id))))b.push('Premier parcours terminé');if(JSON.stringify(b)!==JSON.stringify(progress.badges)){const n={...progress,badges:b};setProgress(n);saveProgress(n);}return b;},[progress,stats.v,stats.d]);
-return <div className='app'><main>{tab==='liste'&&<><h2>Liste</h2><input placeholder='Recherche texte' value={q} onChange={e=>setQ(e.target.value)}/><label><input type='checkbox' checked={favOnly} onChange={e=>setFav(e.target.checked)}/> Favoris</label><label><input type='checkbox' checked={unv} onChange={e=>setUnv(e.target.checked)}/> Non visitées</label>{filtered.map(c=><button key={c.id} className='card' onClick={()=>setSelectedId(c.id)}>{c.name} — {c.city}</button>)}{selected&&<section className='card'><img src={selected.coverImage} alt={selected.name}/><h3>{selected.name}</h3><p>{selected.address}</p><button onClick={()=>window.open(g(selected.latitude,selected.longitude),'_blank')}>Itinéraire</button><button onClick={()=>setProgress(toggleFavorite(selected.id))}>Ajouter aux favoris</button><button onClick={()=>setProgress(markChurchVisited(selected.id))}>Marquer comme visitée</button><h4>Histoire</h4><p>{selected.history.foundationDate} {selected.history.shortText}</p><h4>À découvrir</h4>{selected.discover.map(i=>{const key=`${selected.id}:${i.id}`;const qa=progress.quizAnswers[key];const found=progress.foundDiscoverItemIds.includes(key);return <article key={i.id}><p>{i.title}</p><p>{i.description}</p><p>Besoin d’un indice ? {i.locationHint}</p>{i.question&&<Quiz q={i.question.label} choices={i.question.choices} state={qa} onSubmit={a=>{const ok=i.question!.answers.some(x=>normalize(x)===normalize(a));setProgress(saveQuizAnswer(selected.id!,i.id,a,ok));if(ok)setProgress(markDiscoverItemFound(selected.id!,i.id));}}/>}<button onClick={()=>setProgress(markDiscoverItemFound(selected.id!,i.id))}>Trouvé !</button>{found&&<p>Bonne réponse</p>}</article>})}<textarea placeholder='Notes personnelles' value={progress.churchNotes[selected.id]??''} onChange={e=>setProgress(saveChurchNote(selected.id,e.target.value))}/></section>}</>}{tab==='carte'&&<><h2>Carte</h2>{churches.map(c=><p key={c.id}>{c.name} ({c.latitude}, {c.longitude})</p>)}</>}{tab==='parcours'&&<><h2>Parcours</h2>{routes.map(r=>{const done=r.churchIds.filter(id=>progress.visitedChurchIds.includes(id)).length;return <div key={r.id} className='card'>{r.title} {done}/{r.churchIds.length}</div>})}</>}{tab==='carnet'&&<><h2>Mon carnet</h2><p>{stats.v} visitées · {stats.f} favoris · {stats.d} découvertes</p><ul>{badges.map(b=><li key={b}>{b}</li>)}</ul><button onClick={()=>{const blob=new Blob([JSON.stringify(progress,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='clochers-progress.json';a.click();}}>Exporter progression en JSON</button><input type='file' accept='application/json' onChange={async e=>{const f=e.target.files?.[0];if(!f)return;try{const p=JSON.parse(await f.text());setProgress(p);saveProgress(p);}catch{}}}/><button onClick={()=>window.confirm('Confirmer ?')&&setProgress(resetProgress())}>Réinitialiser la progression</button></>}</main><nav>{[['carte','Carte'],['liste','Liste'],['parcours','Parcours'],['carnet','Mon carnet']].map(([k,l])=><button key={k} onClick={()=>setTab(k as any)}>{l}</button>)}</nav></div>;}
-function Quiz({q,choices,state,onSubmit}:{q:string;choices?:string[];state?:{answer:string;isCorrect:boolean};onSubmit:(a:string)=>void}){const [v,setV]=useState(state?.answer??'');return <div><p>{q}</p>{choices?choices.map(c=><button key={c} onClick={()=>{setV(c);onSubmit(c);}}>{c}</button>):<><input value={v} onChange={e=>setV(e.target.value)}/><button onClick={()=>onSubmit(v)}>Valider</button></>}{state&&<p>{state.isCorrect?'Bonne réponse':'Réessayer'}</p>}</div>}
+import { useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { sites } from './data/sites';
+import { routes } from './data/routes';
+import { useProgress } from './hooks/useProgress';
+import { SiteList } from './components/SiteList';
+import { MapView } from './components/MapView';
+import { SiteDetail } from './components/SiteDetail';
+import { RoutesView } from './components/RoutesView';
+import { CarnetView } from './components/CarnetView';
+
+type Tab = 'liste' | 'carte' | 'parcours' | 'carnet';
+
+const TABS: { key: Tab; label: string; icon: string }[] = [
+  { key: 'liste', label: 'Liste', icon: '📋' },
+  { key: 'carte', label: 'Carte', icon: '🗺️' },
+  { key: 'parcours', label: 'Parcours', icon: '🧭' },
+  { key: 'carnet', label: 'Carnet', icon: '🎖️' },
+];
+
+export function App() {
+  const [tab, setTab] = useState<Tab>('liste');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const api = useProgress();
+  // Instant de référence pour le calcul "ouvert/fermé", figé par rendu.
+  const now = new Date();
+
+  const selected = sites.find((s) => s.id === selectedId) ?? null;
+
+  return (
+    <div className="app">
+      <header className="app__header">
+        <h1>Patrimoine du Cambrésis</h1>
+        <p>Explorez les églises, monuments et trésors du diocèse de Cambrai</p>
+      </header>
+
+      <main className="app__main">
+        {tab === 'liste' && <SiteList sites={sites} api={api} now={now} onSelect={setSelectedId} />}
+        {tab === 'carte' && <MapView sites={sites} onSelect={setSelectedId} />}
+        {tab === 'parcours' && (
+          <RoutesView routes={routes} sites={sites} api={api} onSelect={setSelectedId} />
+        )}
+        {tab === 'carnet' && <CarnetView sites={sites} routes={routes} api={api} />}
+      </main>
+
+      <nav className="app__nav">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            className={tab === t.key ? 'nav-btn nav-btn--on' : 'nav-btn'}
+            onClick={() => setTab(t.key)}
+          >
+            <span className="nav-btn__icon">{t.icon}</span>
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      {selected && (
+        <SiteDetail site={selected} api={api} now={now} onClose={() => setSelectedId(null)} />
+      )}
+    </div>
+  );
+}

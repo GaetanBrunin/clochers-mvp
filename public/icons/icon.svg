@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#7a5a3a" />
+  <g fill="#f6f4ef">
+    <!-- croix du clocher -->
+    <rect x="246" y="70" width="20" height="60" />
+    <rect x="226" y="90" width="60" height="20" />
+    <!-- flèche du clocher -->
+    <polygon points="256,120 300,210 212,210" />
+    <!-- corps de l'église -->
+    <rect x="196" y="210" width="120" height="180" />
+    <!-- porte -->
+    <path d="M236 390 v-70 a20 20 0 0 1 40 0 v70 z" fill="#7a5a3a" />
+    <!-- vitrail rond -->
+    <circle cx="256" cy="255" r="18" fill="#7a5a3a" />
+    <!-- nefs latérales -->
+    <rect x="150" y="270" width="46" height="120" />
+    <rect x="316" y="270" width="46" height="120" />
+    <!-- parvis -->
+    <rect x="140" y="390" width="232" height="16" />
+  </g>
+</svg>

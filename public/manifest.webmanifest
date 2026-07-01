@@ -1,0 +1,14 @@
+{
+  "name": "Clochers du Cambrésis",
+  "short_name": "Clochers",
+  "description": "Découvrez et explorez le patrimoine religieux du diocèse de Cambrai.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f4ef",
+  "theme_color": "#7a5a3a",
+  "icons": [
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
