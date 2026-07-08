@@ -1,0 +1,312 @@
+/* Back-office — réutilise les tokens de styles.css (--accent, --line, etc.) */
+.admin {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 0 60px;
+  min-height: 100vh;
+  background: var(--bg);
+}
+.admin--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* --- Connexion --- */
+.admin-login {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+.admin-login h1 {
+  font-size: 1.2rem;
+}
+.admin-login input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 8px 0;
+  font: inherit;
+}
+.admin-help {
+  margin-top: 14px;
+  text-align: left;
+  font-size: 0.88rem;
+}
+.admin-help summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+.admin-help ol {
+  padding-left: 18px;
+}
+.admin-help code {
+  background: #f0e7dc;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.admin-err {
+  color: var(--closed);
+  font-size: 0.9rem;
+}
+
+/* --- Barre du haut --- */
+.admin-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--accent);
+  color: #fff;
+}
+.admin-bar strong {
+  color: #fff;
+}
+.admin-bar .muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+.admin-bar__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.admin-bar .btn {
+  border-color: #fff;
+}
+.admin-bar .btn--ghost {
+  color: #fff;
+}
+
+.admin-result {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+.admin-result.ok {
+  background: #e0f1e8;
+  color: var(--open);
+}
+.admin-result.ko {
+  background: #f6e2df;
+  color: var(--closed);
+}
+
+/* --- Onglets & liste --- */
+.admin-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 14px 0;
+}
+.admin-tabs button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 6px 14px;
+  color: var(--muted);
+}
+.admin-tabs button.on {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.admin-list {
+  padding: 14px;
+}
+.admin-add {
+  margin-bottom: 12px;
+}
+.admin-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.admin-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 10px 4px 4px;
+}
+.admin-item {
+  flex: 1;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+
+/* --- Éditeur --- */
+.admin-editor {
+  padding: 14px;
+}
+.admin-back {
+  margin-bottom: 12px;
+}
+.af-form h3 {
+  margin: 22px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--line);
+  font-size: 1.05rem;
+}
+
+/* Champs */
+.af {
+  display: block;
+  margin: 10px 0;
+}
+.af__label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.af__hint {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.af input,
+.af textarea,
+.af select,
+.af-mass input,
+.af-mass select,
+.af-img input,
+.af__row input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  background: var(--surface);
+}
+.af textarea {
+  resize: vertical;
+}
+.af--check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.af--check input {
+  width: auto;
+}
+.af-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Listes de champs (tags, réponses…) */
+.af__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.af__row {
+  display: flex;
+  gap: 6px;
+}
+.af__del {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--closed);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.af__add {
+  align-self: flex-start;
+  border: 1px dashed var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Cartes (élément à découvrir, question) */
+.af-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin: 10px 0;
+  background: #faf7f2;
+}
+.af-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.af-details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  margin: 10px 0;
+  background: var(--surface);
+}
+.af-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.af-mass,
+.af-img {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.af-mass select {
+  flex: 0 0 40%;
+}
+
+/* Étapes de parcours */
+.af-steps {
+  list-style: decimal inside;
+  margin: 0;
+  padding: 0;
+}
+.af-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.af-step__ctrl {
+  display: flex;
+  gap: 4px;
+}
+.af-step__ctrl button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.af-step__ctrl button:disabled {
+  opacity: 0.4;
+}
