@@ -38,14 +38,28 @@ npm run preview  # prévisualise le build
 
 Figé sur Vite 5 / React 18 pour fonctionner avec Node 20.13.1.
 
-## Où modifier le contenu ?
+## Back-office (édition sans coder)
 
-- **Sites** (églises, statues, monuments…) : `src/data/sites.ts` (copier un bloc
-  et adapter les champs ; seuls les champs de base sont obligatoires).
-- **Catégories** disponibles : `src/types.ts` (`CATEGORY_META`).
-- **Parcours** : `src/data/routes.ts`.
+Un back-office intégré permet d'ajouter/modifier lieux, histoire, questions et
+parcours **sans toucher au code**, et de publier directement sur le dépôt.
+
+- **Accès** : ajouter `#admin` à l'URL du site (ex. `…/clochers-mvp/#admin`).
+  Non listé dans la navigation ; l'édition nécessite un jeton GitHub.
+- **Connexion** : jeton d'accès personnel GitHub (*fine-grained*) avec la
+  permission **Contents : Read and write** sur ce dépôt. Le jeton reste dans le
+  navigateur (localStorage), envoyé uniquement à l'API GitHub.
+- **Publication** : le bouton « Publier » commite `src/data/sites.json` /
+  `routes.json` ; le workflow reconstruit et déploie (site à jour en ~1-2 min).
+
+## Où modifier le contenu ? (à la main)
+
+Les données éditables sont des fichiers JSON (le back-office écrit dedans) :
+
+- **Sites** : `src/data/sites.json`.
+- **Parcours** : `src/data/routes.json`.
+- **Catégories** disponibles / typage : `src/types.ts` (`CATEGORY_META`).
 - **Photos** : déposer les images dans `public/photos/` et référencer
-  `photos/mon-image.jpg` dans `coverImage` / `gallery` / `discover[].image`.
+  `photos/mon-image.jpg` dans `coverImage` / `gallery` / `discover[].images`.
 - **Badges** : `src/lib/badges.ts`.
 
 ## Structure
