@@ -1,2 +1,15 @@
+# Dépendances
 node_modules/
+
+# Sortie de build (générée par `npm run build`)
 dist/
+assets/
+*.tsbuildinfo
+
+# Fichiers d'environnement / éditeur
+.claude/settings.local.json
+.DS_Store
+*.local
+
+# Config éditeur
+.vscode/
