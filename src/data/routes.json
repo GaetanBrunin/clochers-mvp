@@ -32,5 +32,20 @@
       "abbaye",
       "histoire"
     ]
+  },
+  {
+    "id": "test",
+    "title": "Test",
+    "description": "test description",
+    "duration": "",
+    "distance": "",
+    "difficulty": "easy",
+    "siteIds": [
+      "place-aux-bois",
+      "basilique-caudry",
+      "remparts-le-quesnoy",
+      "musee-matisse-cateau"
+    ],
+    "tags": []
   }
 ]
