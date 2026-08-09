@@ -766,7 +766,12 @@
     "longitude": 3.228065,
     "coverImage": "",
     "shortDescription": "Vestige des anciennes fortifications de Cambrai, la tour Saint-Fiacre témoigne encore aujourd’hui du passé défensif de la ville. Édifiée à la fin du XIVe siècle et surnommée « tour des Sottes » au XIXe siècle, elle est inscrite au titre des Monuments historiques depuis le 1er décembre 1997.",
-    "tags": [],
+    "tags": [
+      "fortification",
+      "moyen-âge",
+      "tour",
+      "guerre"
+    ],
     "anecdote": "Les latrines de l'édifice sont toujours visibles de nos jours. Elles sont situés sur son flanc droit.",
     "openingStatus": "closed",
     "history": {
