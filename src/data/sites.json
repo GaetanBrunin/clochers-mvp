@@ -526,7 +526,8 @@
     "tags": [
       "fortification",
       "moyen-âge",
-      "porte"
+      "porte",
+      "guerre"
     ],
     "anecdote": "Ses tours ont vu passer des siècles de marchands, de soldats et de processions entrant dans Cambrai.",
     "openingStatus": "free_access",
@@ -765,11 +766,7 @@
     "longitude": 3.228065,
     "coverImage": "",
     "shortDescription": "Vestige des anciennes fortifications de Cambrai, la tour Saint-Fiacre témoigne encore aujourd’hui du passé défensif de la ville. Édifiée à la fin du XIVe siècle et surnommée « tour des Sottes » au XIXe siècle, elle est inscrite au titre des Monuments historiques depuis le 1er décembre 1997.",
-    "tags": [
-      "Militaire",
-      "Fortification",
-      "Tour"
-    ],
+    "tags": [],
     "anecdote": "Les latrines de l'édifice sont toujours visibles de nos jours. Elles sont situés sur son flanc droit.",
     "openingStatus": "closed",
     "history": {
