@@ -780,5 +780,17 @@
       "longText": "Édifiée à la fin du XIVe siècle, la tour Saint-Fiacre faisait partie des anciennes fortifications de Cambrai. Elle est construite sur un plan semi-circulaire légèrement outrepassé. Sa structure en pierre calcaire repose sur un soubassement de grès, tandis que ses créneaux furent remplacés au XVIe siècle par un parapet en briques.\n\nSur le côté droit, l'accroche de la courtine et la porte en bois marquent l'ancien accès depuis le rempart. L'accès à la partie défensive se situait au niveau de la porte aujourd'hui murée, côté ville. Côté campagne, le fossé, situé au niveau du boulevard, constituait une défense supplémentaire."
     },
     "discover": []
+  },
+  {
+    "id": "tour-du-caudron",
+    "name": "Tour du Caudron",
+    "category": "monument",
+    "city": "Cambrai",
+    "address": "35 Boulevard Jean Bart",
+    "latitude": 50.175175,
+    "longitude": 3.221795,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
