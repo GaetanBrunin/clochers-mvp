@@ -865,5 +865,17 @@
     "coverImage": "",
     "shortDescription": "",
     "tags": []
+  },
+  {
+    "id": "porte-saint-ladre",
+    "name": "Porte Saint-Ladre",
+    "category": "eglise",
+    "city": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
