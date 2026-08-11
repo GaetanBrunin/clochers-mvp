@@ -817,5 +817,17 @@
     "coverImage": "",
     "shortDescription": "",
     "tags": []
+  },
+  {
+    "id": "front-de-bevres",
+    "name": "Front de Bèvres",
+    "category": "autre",
+    "city": "",
+    "address": "",
+    "latitude": 50.1754,
+    "longitude": 3.2362,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
