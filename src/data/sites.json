@@ -829,5 +829,17 @@
     "coverImage": "",
     "shortDescription": "",
     "tags": []
+  },
+  {
+    "id": "chateau-de-selles",
+    "name": "Château de Selles",
+    "category": "monument",
+    "city": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
