@@ -846,10 +846,10 @@
     "id": "porte-notre-dame",
     "name": "Porte Notre-Dame",
     "category": "monument",
-    "city": "",
+    "city": "Cambrai",
     "address": "",
-    "latitude": 50.1754,
-    "longitude": 3.2362,
+    "latitude": 50.177913,
+    "longitude": 3.236574,
     "coverImage": "",
     "shortDescription": "",
     "tags": []
