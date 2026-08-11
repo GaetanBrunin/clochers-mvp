@@ -834,10 +834,10 @@
     "id": "chateau-de-selles",
     "name": "Château de Selles",
     "category": "monument",
-    "city": "",
+    "city": "Cambrai",
     "address": "",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 50.181938,
+    "longitude": 3.230409,
     "coverImage": "",
     "shortDescription": "",
     "tags": []
