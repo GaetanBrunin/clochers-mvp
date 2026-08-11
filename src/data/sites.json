@@ -853,5 +853,17 @@
     "coverImage": "",
     "shortDescription": "",
     "tags": []
+  },
+  {
+    "id": "citadelle-de-cambrai",
+    "name": "Citadelle de Cambrai",
+    "category": "eglise",
+    "city": "",
+    "address": "",
+    "latitude": 50.1754,
+    "longitude": 3.2362,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
