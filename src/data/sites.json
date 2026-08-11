@@ -841,5 +841,17 @@
     "coverImage": "",
     "shortDescription": "",
     "tags": []
+  },
+  {
+    "id": "porte-notre-dame",
+    "name": "Porte Notre-Dame",
+    "category": "monument",
+    "city": "",
+    "address": "",
+    "latitude": 50.1754,
+    "longitude": 3.2362,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
