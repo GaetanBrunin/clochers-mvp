@@ -870,10 +870,10 @@
     "id": "porte-saint-ladre",
     "name": "Porte Saint-Ladre",
     "category": "monument",
-    "city": "",
+    "city": "Cambrai",
     "address": "",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 50.169826,
+    "longitude": 3.239127,
     "coverImage": "",
     "shortDescription": "",
     "tags": []
