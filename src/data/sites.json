@@ -810,10 +810,10 @@
     "id": "tour-des-arquets",
     "name": "Tour des Arquets",
     "category": "monument",
-    "city": "",
+    "city": "Cambrai",
     "address": "",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 50.174963,
+    "longitude": 3.222788,
     "coverImage": "",
     "shortDescription": "",
     "tags": []
