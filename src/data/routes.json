@@ -47,5 +47,32 @@
       "musee-matisse-cateau"
     ],
     "tags": []
+  },
+  {
+    "id": "les-fortification-de-cambrai",
+    "title": "Les fortification de Cambrai",
+    "description": "Sur les traces des fortifications de Cambrai :\n\nPartez à la découverte de l’ancien système défensif de Cambrai à travers un parcours faisant le tour des anciennes fortifications de la ville. Cette randonnée permet de suivre le tracé des remparts et d’en découvrir les principaux vestiges encore visibles : portes, tours, ouvrages défensifs et autres témoins de l’enceinte fortifiée.\n\nUne promenade entre patrimoine et paysage urbain, pour redécouvrir Cambrai sous l’angle de son passé militaire et comprendre l’empreinte laissée par ses fortifications dans la ville actuelle.\n",
+    "duration": "1h40",
+    "distance": "5 km",
+    "difficulty": "easy",
+    "siteIds": [
+      "porte-de-paris-cambrai",
+      "tour-saint-fiacre",
+      "tour-des-arquets",
+      "tour-du-caudron",
+      "front-de-bevres",
+      "chateau-de-selles",
+      "porte-notre-dame",
+      "citadelle-de-cambrai",
+      "porte-saint-ladre"
+    ],
+    "tags": [
+      "fortification",
+      "tour",
+      "porte",
+      "moyen-âge",
+      "escaut",
+      "château"
+    ]
   }
 ]
