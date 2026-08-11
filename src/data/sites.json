@@ -858,10 +858,10 @@
     "id": "citadelle-de-cambrai",
     "name": "Citadelle de Cambrai",
     "category": "autre",
-    "city": "",
+    "city": "Cambrai",
     "address": "",
-    "latitude": 50.1754,
-    "longitude": 3.2362,
+    "latitude": 50.172066,
+    "longitude": 3.240772,
     "coverImage": "",
     "shortDescription": "",
     "tags": []
