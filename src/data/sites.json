@@ -805,5 +805,17 @@
       "publicTransport": false,
       "notes": "Attention ! Emplacement dangereux situé sur le Boulevard. "
     }
+  },
+  {
+    "id": "tour-des-arquets",
+    "name": "Tour des Arquets",
+    "category": "monument",
+    "city": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "coverImage": "",
+    "shortDescription": "",
+    "tags": []
   }
 ]
