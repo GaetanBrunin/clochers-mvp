@@ -826,6 +826,24 @@
       "moyen-âge",
       "tour",
       "militaire"
+    ],
+    "discover": [
+      {
+        "id": "item-1",
+        "title": "\"Arquets\"",
+        "description": " La \"Tour des Arquets\" est en réalité une porte d'eau qui permettait le passage de l'Escaut. Observer attentivement ",
+        "question": {
+          "type": "qcm",
+          "label": "D",
+          "answers": [
+            ""
+          ],
+          "choices": [
+            "",
+            ""
+          ]
+        }
+      }
     ]
   },
   {
