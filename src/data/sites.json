@@ -522,7 +522,7 @@
     "latitude": 50.171148,
     "longitude": 3.231715,
     "coverImage": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80",
-    "shortDescription": "Porte fortifiée médiévale, vestige des anciennes murailles de la cité.",
+    "shortDescription": "Porte fortifiée médiévale, vestige des anciennes murailles de la cité. Elle est classée au titre des Monuments historiques depuis le 5 juin 1942. ",
     "tags": [
       "fortification",
       "moyen-âge",
@@ -530,7 +530,7 @@
       "militaire"
     ],
     "anecdote": "Ses tours ont vu passer des siècles de marchands, de soldats et de processions entrant dans Cambrai.",
-    "openingStatus": "free_access",
+    "openingStatus": "closed",
     "access": {
       "pmr": true,
       "parking": true,
@@ -538,7 +538,7 @@
       "notes": "Visible depuis la rue."
     },
     "history": {
-      "foundationDate": "fin du XIVe siècle",
+      "foundationDate": "Fin du XIVe siècle",
       "shortText": "L’une des portes de l’enceinte médiévale de Cambrai, encadrée de deux tours."
     },
     "discover": [
