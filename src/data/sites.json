@@ -830,11 +830,11 @@
     "discover": [
       {
         "id": "item-1",
-        "title": "\"Arquets\"",
+        "title": "Le terme \"Arquets\"",
         "description": "La tour des Arquets est en réalité une porte d'eau. Elle permettait de réguler l'entrée et la sortie de l'Escaut dans la cité, mais pouvait également servir à inonder les environs afin de ralentir l'ennemi en cas de siège.",
         "question": {
           "type": "qcm",
-          "label": "Pourquoi cette tour est surnommée \"Tour des ARQUETS\" ?",
+          "label": "Pourquoi cette tour est surnommée \"Tour des Arquets\" ?",
           "answers": [
             "En raison des petites arches permettant le passage de l'Escaut"
           ],
@@ -843,8 +843,15 @@
             "Du nom d'une ancienne famille cambrésienne, les Arquet",
             "En raison des petites arches permettant le passage de l'Escaut",
             "Du nom de l'ancien quartier des Arquets situé à proximité"
-          ]
+          ],
+          "hint": "Le terme \"Arquets\" est au pluriel.",
+          "explanation": "Le terme est composé du mot \"Arqu\" qui signifie arche ainsi que du diminutif en \"et\". Comme dans Catelet, petit château ou Eauette, petite eau, Arquets désignes les petites arches.   "
         }
+      },
+      {
+        "id": "item-2",
+        "title": "Système défensif",
+        "description": ""
       }
     ]
   },
