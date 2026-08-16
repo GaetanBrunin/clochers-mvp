@@ -867,7 +867,9 @@
         "question": {
           "type": "qcm",
           "label": "Quel est le rôle d'une dame maçonnée sur un batardeau ?",
-          "answers": [],
+          "answers": [
+            "Empêcher l’ennemi de traverser le fossé en cheminant sur le batardeau"
+          ],
           "choices": [
             "Protéger le mécanisme permettant de réguler le niveau d’eau des fossés",
             "Renforcer le batardeau afin qu’il résiste à la pression exercée par l’eau",
