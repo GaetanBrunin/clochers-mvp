@@ -846,12 +846,37 @@
           ],
           "hint": "Le terme \"Arquets\" est au pluriel.",
           "explanation": "Le terme est composé du mot \"Arqu\" qui signifie arche ainsi que du diminutif en \"et\". Comme dans Catelet, petit château ou Eauette, petite eau, Arquets désignes les petites arches.   "
-        }
+        },
+        "images": [
+          {
+            "src": ""
+          }
+        ]
       },
       {
         "id": "item-2",
         "title": "Système défensif",
-        "description": ""
+        "description": "Sur la rive gauche de l'Escaut, du pont routier jusqu'à la tour, vous distinguerez un ancien mur de pierre, aujourd’hui en grande partie dissimulé. Un arbuste pousse même au centre de l’ouvrage. Sous cet épais couvert végétal se cache en réalité un batardeau, surmonté d’une dame, vestige du système défensif de Cambrai.",
+        "images": [
+          {
+            "src": "https://upload.wikimedia.org/wikipedia/commons/0/06/Fortification_de_Belfort_-_PA00101140_-_004.jpg?utm_source=fr.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "caption": "Une dame"
+          }
+        ],
+        "locationHint": "Il est caché sous la végétation",
+        "question": {
+          "type": "qcm",
+          "label": "Quel est le rôle d'une dame maçonnée sur un batardeau ?",
+          "answers": [],
+          "choices": [
+            "Protéger le mécanisme permettant de réguler le niveau d’eau des fossés",
+            "Renforcer le batardeau afin qu’il résiste à la pression exercée par l’eau",
+            "Servir de poste d’observation aux soldats chargés de surveiller les fossés",
+            "Empêcher l’ennemi de traverser le fossé en cheminant sur le batardeau"
+          ],
+          "hint": "Imaginez que vous êtes un assaillant et que le batardeau vous offre un passage idéal pour franchir le fossé…",
+          "explanation": "La dame est un ouvrage maçonné massif, généralement de forme cylindrique, installé sur un batardeau afin d’empêcher toute tentative de franchissement par l’ennemi."
+        }
       }
     ]
   },
