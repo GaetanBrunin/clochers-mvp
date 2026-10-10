@@ -276,12 +276,29 @@ button {
   text-align: left;
   box-shadow: var(--shadow);
 }
-.church-card img {
-  width: 96px;
-  align-self: stretch;
-  min-height: 96px;
-  object-fit: cover;
+.church-card__media {
+  position: relative;
   flex: 0 0 auto;
+  width: 104px;
+  align-self: stretch;
+  min-height: 104px;
+  overflow: hidden;
+  background: #e9e2d8;
+}
+.church-card__blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(14px) brightness(0.96);
+  transform: scale(1.25);
+}
+.church-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 .church-card__body {

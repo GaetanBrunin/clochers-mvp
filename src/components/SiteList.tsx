@@ -120,7 +120,16 @@ export function SiteList({
           return (
             <li key={s.id}>
               <button className="church-card" onClick={() => onSelect(s.id)}>
-                <img src={s.coverImage} alt={s.name} loading="lazy" />
+                <span className="church-card__media">
+                  {s.coverImage && (
+                    <span
+                      className="church-card__blur"
+                      style={{ backgroundImage: `url("${s.coverImage}")` }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <img src={s.coverImage} alt={s.name} loading="lazy" />
+                </span>
                 <div className="church-card__body">
                   <span className="cat-tag">
                     {CATEGORY_META[s.category].emoji} {CATEGORY_META[s.category].label}
