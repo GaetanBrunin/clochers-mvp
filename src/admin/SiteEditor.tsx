@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CATEGORY_META,
   type Day,
@@ -9,7 +10,7 @@ import {
   type SiteCategory,
 } from '../types';
 import { DAY_LABELS } from '../lib/openingHours';
-import { Area, Card, Check, Field, Num, Select, StringList, Text } from './ui';
+import { Area, Card, Check, Field, ImageInput, Num, Select, StringList, Text, Thumb, UploadButton } from './ui';
 
 const DAYS = Object.keys(DAY_LABELS) as Day[];
 
@@ -56,17 +57,15 @@ export function SiteEditor({ site, onChange }: { site: Site; onChange: (s: Site)
         <Num label="Latitude" value={site.latitude} onChange={(v) => patch({ latitude: v })} hint="ex. 50.1754" />
         <Num label="Longitude" value={site.longitude} onChange={(v) => patch({ longitude: v })} hint="ex. 3.2362" />
       </div>
-      <Text
+      <ImageInput
         label="Image de couverture"
         value={site.coverImage}
         onChange={(v) => patch({ coverImage: v })}
-        hint="URL, ou photos/mon-image.jpg (déposée dans public/photos/)"
+        hint="Importe une image depuis ton ordinateur, ou colle une URL."
       />
-      <StringList
-        label="Galerie (autres photos)"
+      <GalleryEditor
         values={site.gallery ?? []}
         onChange={(v) => patch({ gallery: v.length ? v : undefined })}
-        placeholder="URL ou photos/…"
       />
       <Area
         label="Description courte"
@@ -301,6 +300,7 @@ function ImagesEditor({
   images: { src: string; caption?: string }[];
   onChange: (i: { src: string; caption?: string }[]) => void;
 }) {
+  const [err, setErr] = useState('');
   const set = (i: number, v: { src: string; caption?: string }) =>
     onChange(images.map((x, j) => (j === i ? v : x)));
   return (
@@ -308,6 +308,7 @@ function ImagesEditor({
       <div className="af__list">
         {images.map((img, i) => (
           <div className="af-img" key={i}>
+            <Thumb value={img.src} />
             <input
               value={img.src}
               placeholder="URL ou photos/detail.jpg"
@@ -323,9 +324,61 @@ function ImagesEditor({
             </button>
           </div>
         ))}
-        <button type="button" className="af__add" onClick={() => onChange([...images, { src: '' }])}>
-          ＋ Ajouter une image
-        </button>
+        <div className="af-image__actions">
+          <button type="button" className="af__add" onClick={() => onChange([...images, { src: '' }])}>
+            ＋ Ajouter une image
+          </button>
+          <UploadButton
+            multiple
+            onUploaded={(paths) => onChange([...images, ...paths.map((src) => ({ src }))])}
+            onError={setErr}
+          />
+        </div>
+        {err && <span className="af__err">{err}</span>}
+      </div>
+    </Field>
+  );
+}
+
+/** Galerie de photos d'un lieu : import multiple + miniatures + saisie manuelle. */
+function GalleryEditor({
+  values,
+  onChange,
+}: {
+  values: string[];
+  onChange: (v: string[]) => void;
+}) {
+  const [err, setErr] = useState('');
+  const set = (i: number, v: string) => onChange(values.map((x, j) => (j === i ? v : x)));
+  const remove = (i: number) => onChange(values.filter((_, j) => j !== i));
+  return (
+    <Field label="Galerie (autres photos)">
+      <div className="af__list">
+        {values.map((v, i) => (
+          <div className="af-img" key={i}>
+            <Thumb value={v} />
+            <input
+              value={v}
+              placeholder="URL ou photos/…"
+              onChange={(e) => set(i, e.target.value)}
+            />
+            <button type="button" className="af__del" onClick={() => remove(i)} aria-label="Supprimer">
+              ✕
+            </button>
+          </div>
+        ))}
+        <div className="af-image__actions">
+          <button type="button" className="af__add" onClick={() => onChange([...values, ''])}>
+            ＋ Ajouter
+          </button>
+          <UploadButton
+            multiple
+            label="Importer des photos"
+            onUploaded={(paths) => onChange([...values, ...paths])}
+            onError={setErr}
+          />
+        </div>
+        {err && <span className="af__err">{err}</span>}
       </div>
     </Field>
   );

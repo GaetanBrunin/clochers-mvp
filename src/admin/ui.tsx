@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import { useRef, useState, type ChangeEvent, type ReactNode } from 'react';
+import { getToken, photoPreviewUrl, uploadPhoto } from '../lib/github';
 
 /** Bloc label + champ. */
 export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) {
@@ -149,6 +150,119 @@ export function StringList({
         <button type="button" className="af__add" onClick={() => onChange([...values, ''])}>
           ＋ Ajouter
         </button>
+      </div>
+    </Field>
+  );
+}
+
+/**
+ * Bouton « Importer depuis mon ordinateur » : ouvre le sélecteur de fichiers,
+ * envoie la/les image(s) dans public/photos/, puis renvoie le(s) chemin(s) via onUploaded.
+ */
+export function UploadButton({
+  label = 'Importer depuis mon ordinateur',
+  multiple = false,
+  onUploaded,
+  onError,
+}: {
+  label?: string;
+  multiple?: boolean;
+  onUploaded: (paths: string[]) => void;
+  onError?: (msg: string) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+
+  const onFiles = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    e.target.value = ''; // permet de re-sélectionner le même fichier
+    if (!files.length) return;
+    setBusy(true);
+    onError?.('');
+    try {
+      const token = getToken();
+      const paths: string[] = [];
+      for (const f of files) paths.push(await uploadPhoto(token, f));
+      onUploaded(paths);
+    } catch (ex) {
+      onError?.(ex instanceof Error ? ex.message : String(ex));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        multiple={multiple}
+        hidden
+        onChange={onFiles}
+      />
+      <button
+        type="button"
+        className="af__upload"
+        disabled={busy}
+        onClick={() => inputRef.current?.click()}
+      >
+        {busy ? '⏳ Envoi en cours…' : `📁 ${label}`}
+      </button>
+    </>
+  );
+}
+
+/** Miniature de prévisualisation d'une image (chemin photos/… ou URL). */
+export function Thumb({ value }: { value: string }) {
+  const url = photoPreviewUrl(value);
+  if (!url) return null;
+  return (
+    <img
+      className="af__thumb"
+      src={url}
+      alt=""
+      loading="lazy"
+      onError={(e) => ((e.currentTarget.style.display = 'none'))}
+    />
+  );
+}
+
+/**
+ * Champ pour UNE image : saisie manuelle (URL / chemin) + import depuis l'ordinateur
+ * + miniature. Utilisé pour l'image de couverture et les images « à découvrir ».
+ */
+export function ImageInput({
+  label,
+  value,
+  onChange,
+  hint,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  hint?: string;
+  placeholder?: string;
+}) {
+  const [err, setErr] = useState('');
+  return (
+    <Field label={label} hint={hint}>
+      <div className="af-image">
+        <div className="af-image__row">
+          <input
+            value={value}
+            placeholder={placeholder ?? 'URL ou photos/mon-image.jpg'}
+            onChange={(e) => onChange(e.target.value)}
+          />
+          <UploadButton
+            label="Importer"
+            onUploaded={(paths) => paths[0] && onChange(paths[0])}
+            onError={setErr}
+          />
+        </div>
+        {err && <span className="af__err">{err}</span>}
+        <Thumb value={value} />
       </div>
     </Field>
   );

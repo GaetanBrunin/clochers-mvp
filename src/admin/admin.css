@@ -281,6 +281,59 @@
   flex: 0 0 40%;
 }
 
+/* --- Import d'images --- */
+.af__upload {
+  align-self: flex-start;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.af__upload:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.af__err {
+  display: block;
+  color: var(--closed);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+.af-image {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.af-image__row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.af-image__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.af__thumb {
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #f0e7dc;
+}
+.af-image > .af__thumb {
+  width: 120px;
+  height: 80px;
+}
+
 /* Étapes de parcours */
 .af-steps {
   list-style: decimal inside;
