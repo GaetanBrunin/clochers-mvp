@@ -3,6 +3,7 @@ import { CATEGORY_META, type Site } from '../types';
 import type { ProgressApi } from '../hooks/useProgress';
 import { OpeningBadge } from './OpeningBadge';
 import { DiscoverCard } from './DiscoverCard';
+import { Lightbox } from './Lightbox';
 import { DAY_LABELS, dayFromDate, groupedMassTimes, weeklyRows } from '../lib/openingHours';
 import { geoUrl, googleMapsUrl, osmUrl } from '../lib/geo';
 
@@ -22,9 +23,10 @@ export function SiteDetail({
 }) {
   const [tab, setTab] = useState<Tab>('infos');
   const [heroIndex, setHeroIndex] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
 
   const meta = CATEGORY_META[site.category];
-  const images = [site.coverImage, ...(site.gallery ?? [])];
+  const images = [site.coverImage, ...(site.gallery ?? [])].filter(Boolean);
   const visited = api.isVisited(site.id);
   const favorite = api.isFavorite(site.id);
   const todayKey = dayFromDate(now);
@@ -49,7 +51,17 @@ export function SiteDetail({
   return (
     <div className="detail" role="dialog" aria-label={site.name}>
       <div className="detail__hero">
-        <img src={images[heroIndex]} alt={site.name} />
+        {images.length > 0 && (
+          <button
+            type="button"
+            className="detail__hero-btn"
+            onClick={() => setLightbox(true)}
+            aria-label="Voir les photos en grand"
+          >
+            <img src={images[heroIndex]} alt={site.name} />
+            <span className="detail__hero-zoom" aria-hidden="true">⛶</span>
+          </button>
+        )}
         <button className="detail__close" onClick={onClose} aria-label="Fermer">
           ✕
         </button>
@@ -231,6 +243,16 @@ export function SiteDetail({
           />
         </label>
       </div>
+
+      {lightbox && (
+        <Lightbox
+          images={images}
+          index={heroIndex}
+          alt={site.name}
+          onClose={() => setLightbox(false)}
+          onIndexChange={setHeroIndex}
+        />
+      )}
     </div>
   );
 }

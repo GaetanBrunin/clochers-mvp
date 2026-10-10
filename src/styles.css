@@ -278,9 +278,11 @@ button {
 }
 .church-card img {
   width: 96px;
-  height: 96px;
+  align-self: stretch;
+  min-height: 96px;
   object-fit: cover;
   flex: 0 0 auto;
+  display: block;
 }
 .church-card__body {
   padding: 10px 12px 10px 0;
@@ -322,12 +324,35 @@ button {
 }
 .detail__hero {
   position: relative;
+  background: #11100e;
 }
-.detail__hero > img {
+.detail__hero-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.detail__hero-btn > img {
   width: 100%;
   height: 240px;
   object-fit: cover;
   display: block;
+}
+.detail__hero-zoom {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.95rem;
+  pointer-events: none;
 }
 .detail__close {
   position: absolute;
@@ -364,6 +389,102 @@ button {
 }
 .thumb--on {
   border-color: #fff;
+}
+
+/* ---------- Lightbox (visionneuse plein écran) ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.15s ease;
+  touch-action: pan-y;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.lightbox__img {
+  max-width: 94vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+.lightbox__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 64px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.lightbox__nav--prev {
+  left: 10px;
+}
+.lightbox__nav--next {
+  right: 10px;
+}
+.lightbox__dots {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.lightbox__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+.lightbox__dot--on {
+  background: #fff;
+}
+.lightbox__count {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+}
+@media (max-width: 560px) {
+  .lightbox__nav {
+    width: 40px;
+    height: 54px;
+    font-size: 1.6rem;
+  }
 }
 
 .detail__body {
