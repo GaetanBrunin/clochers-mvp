@@ -619,10 +619,28 @@ button {
 .discover__figure {
   margin: 0;
 }
-.discover__figure img {
+.discover__media {
+  position: relative;
+  display: block;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 220px;
+  overflow: hidden;
+  background: #e9e2d8;
+}
+.discover__blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) brightness(0.96);
+  transform: scale(1.25);
+}
+.discover__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 .discover__figure figcaption {
@@ -642,8 +660,8 @@ button {
   flex: 0 0 82%;
   scroll-snap-align: start;
 }
-.discover__gallery .discover__figure img {
-  height: 160px;
+.discover__gallery .discover__media {
+  height: 200px;
   border-radius: 8px;
 }
 .discover__body {

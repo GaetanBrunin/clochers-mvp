@@ -29,7 +29,16 @@ export function DiscoverCard({
         <div className={images.length > 1 ? 'discover__gallery' : ''}>
           {images.map((img, i) => (
             <figure className="discover__figure" key={img.src + i}>
-              <img src={img.src} alt={img.caption ?? item.title} loading="lazy" />
+              <span className="discover__media">
+                {img.src && (
+                  <span
+                    className="discover__blur"
+                    style={{ backgroundImage: `url("${img.src}")` }}
+                    aria-hidden="true"
+                  />
+                )}
+                <img src={img.src} alt={img.caption ?? item.title} loading="lazy" />
+              </span>
               {img.caption && <figcaption>{img.caption}</figcaption>}
             </figure>
           ))}
