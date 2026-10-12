@@ -245,7 +245,7 @@
     "address": "Rue du Grand Séminaire, 59400 Cambrai",
     "latitude": 50.1766,
     "longitude": 3.2345,
-    "coverImage": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80",
+    "coverImage": "photos/img-0911.jpg",
     "shortDescription": "Ancien clocher de l'église Saint-Martin, devenu beffroi civique, symbole des libertés communales.",
     "tags": [
       "monument",
@@ -293,6 +293,10 @@
           "explanation": "Le beffroi est inscrit au patrimoine mondial de l’UNESCO depuis 2005."
         }
       }
+    ],
+    "gallery": [
+      "",
+      "photos/img-6345.jpg"
     ]
   },
   {
