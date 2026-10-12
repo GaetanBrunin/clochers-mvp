@@ -793,7 +793,7 @@
     "address": "35 Boulevard Jean Bart",
     "latitude": 50.175175,
     "longitude": 3.221795,
-    "coverImage": "",
+    "coverImage": "photos/pb-cam-p2-tour-du-caudron-01.jpg",
     "shortDescription": "Vestige des anciennes fortifications de Cambrai, la tour du Caudron témoigne encore aujourd’hui du passé défensif de la ville. Édifiée au début XVe siècle et surnommée rarement « tour de Caudry  », elle est inscrite au titre des Monuments historiques depuis le 1er décembre 1997.",
     "tags": [
       "fortification",
@@ -813,7 +813,11 @@
       "parking": false,
       "publicTransport": false,
       "notes": "Attention ! Emplacement dangereux situé sur le Boulevard. "
-    }
+    },
+    "gallery": [
+      "photos/pb-cam-p2-tour-du-caudron-02.jpg",
+      "photos/pb-cam-p2-tour-du-caudron-04.jpg"
+    ]
   },
   {
     "id": "tour-des-arquets",
