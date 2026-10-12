@@ -525,7 +525,7 @@
     "address": "Avenue de la Victoire, 59400 Cambrai",
     "latitude": 50.171148,
     "longitude": 3.231715,
-    "coverImage": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80",
+    "coverImage": "",
     "shortDescription": "Porte fortifiée médiévale, vestige des anciennes murailles de la cité. Elle est classée au titre des Monuments historiques depuis le 5 juin 1942. ",
     "tags": [
       "fortification",
@@ -823,7 +823,7 @@
     "address": "",
     "latitude": 50.174963,
     "longitude": 3.222788,
-    "coverImage": "",
+    "coverImage": "photos/img-0243.jpg",
     "shortDescription": "Située entre la tour du Caudron et la tour Saint-Fiacre, la \"Tour des Arquets\" est en réalité une porte... ",
     "tags": [
       "fortification",
@@ -884,6 +884,10 @@
           "explanation": "La dame est un ouvrage maçonné massif, généralement de forme cylindrique, installé sur un batardeau afin d’empêcher toute tentative de franchissement par l’ennemi."
         }
       }
+    ],
+    "gallery": [
+      "photos/img-0244.jpg",
+      "photos/img-0241.jpg"
     ]
   },
   {
