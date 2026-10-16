@@ -490,13 +490,13 @@
   },
   {
     "id": "chapelle-grand-seminaire-cambrai",
-    "name": "Chapelle du Grand Séminaire",
+    "name": "Chapelle des Jésuites",
     "category": "chapelle",
     "city": "Cambrai",
     "address": "Rue du Grand Séminaire, 59400 Cambrai",
     "latitude": 50.1743,
     "longitude": 3.236,
-    "coverImage": "https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=1200&q=80",
+    "coverImage": "photos/img-6321.jpg",
     "shortDescription": "Ancienne chapelle des Jésuites, rare témoin de l’art baroque dans le nord de la France.",
     "tags": [
       "baroque",
