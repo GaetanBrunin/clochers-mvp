@@ -718,21 +718,15 @@
   },
   {
     "id": "remparts-le-quesnoy",
-    "name": "Remparts de Le Quesnoy",
+    "name": "Remparts du Cateau",
     "category": "monument",
-    "city": "Le Quesnoy",
-    "address": "Les remparts, 59530 Le Quesnoy",
-    "latitude": 50.2472,
-    "longitude": 3.6382,
-    "coverImage": "https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&w=1200&q=80",
-    "shortDescription": "Remarquables fortifications de type Vauban, entourées de douves et de promenades boisées.",
-    "tags": [
-      "vauban",
-      "fortification",
-      "mémoire",
-      "nouvelle-zélande"
-    ],
-    "anecdote": "En novembre 1918, la ville fut libérée par des soldats néo-zélandais escaladant les remparts : un lien de mémoire toujours vivant avec la Nouvelle-Zélande.",
+    "city": "Le Cateau-Cambrésis",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "coverImage": "photos/pb-cat-p2-remparts-du-cateau-01.jpg",
+    "shortDescription": "",
+    "tags": [],
     "openingStatus": "free_access",
     "access": {
       "pmr": false,
@@ -740,30 +734,10 @@
       "publicTransport": false,
       "notes": "Promenade des remparts en accès libre ; certains passages sont escarpés."
     },
-    "history": {
-      "foundationDate": "remaniés au XVIIe siècle",
-      "shortText": "Enceinte bastionnée perfectionnée à l’époque de Vauban, l’une des mieux conservées de la région."
-    },
-    "discover": [
-      {
-        "id": "liberation-1918",
-        "title": "Le mémorial néo-zélandais",
-        "locationHint": "Près des remparts, côté monument commémoratif.",
-        "description": "Un monument rappelle l’exploit des troupes néo-zélandaises en 1918.",
-        "question": {
-          "type": "qcm",
-          "label": "Quels soldats ont libéré Le Quesnoy en 1918 ?",
-          "choices": [
-            "Néo-zélandais",
-            "Canadiens",
-            "Australiens"
-          ],
-          "answers": [
-            "Néo-zélandais"
-          ],
-          "explanation": "Les soldats néo-zélandais escaladèrent les remparts le 4 novembre 1918."
-        }
-      }
+    "discover": [],
+    "gallery": [
+      "photos/pb-cat-p2-remparts-du-cateau-02.jpg",
+      "photos/pb-cat-p2-remparts-du-cateau-03.jpg"
     ]
   },
   {
